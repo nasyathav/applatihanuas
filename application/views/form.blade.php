@@ -27,18 +27,24 @@
       <div class="col-md-6">
         <h2 class="text-body-emphasis">Form Input Artikel</h2>
         <p>Masukan data yang akan di proses</p>
-        <form>
-        <form method="post" action="{{ site_url('welcome/simpan') }}">
+        <form method="post" action="{{ site_url('Welcome/simpan') }}">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
-                <input class="form-control"/>
-                <select class="form-control" name="username">
-
-                  @foreach ($avail_user as $user)
-                  <option value="{{ $user->id }}">{{ $user->username }}</option>
+                <select class = "form-control" name="user_id" id="">
+                  @foreach ($user_list as $user)
+                    <option value="{{ $user->id }}">{{ $user->username }}</option>
                   @endforeach
-                  </select> 
+                </select>
             </div>
+            <div>
+              <label for="exampleInputEmail1" class="form-label">Jenis</label>
+              <br>
+              <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
+               <input type="radio" name="jenis_Artikel" value="Berita"> Berita
+               <input type="radio" name="jenis_Artikel" value="Tutorial"> Tutorial
+               <input type="radio" name="jenis_Artikel" value="Blog"> Blog
+            </div>
+            <br>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Artikel</label>
                 <textarea class="form-control" id="nama" name="artikel" rows="3"></textarea>

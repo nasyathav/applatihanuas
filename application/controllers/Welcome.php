@@ -43,21 +43,23 @@ class Welcome extends CI_Controller
 
     public function simpan()
     {
-        $this->_createView('simpan', []);
-        $username = $this->input->post('username');
-        $artikel = $this->input->post('artikel');
+        
+        if ($this->input->post()){
+            $user_id = $this->input->post('user_id');
+            $article = $this->input->post('article');
+            $jenis = $this->input->post('radio');
+            
+            $post = new Post();
+    
+            $post->user_id = $user_id;
+            $post->article = $article;
+            $post->jenis = $jenis;
+            $post->save();
+        }
 
-        $post = new Post();
-        $post->user_id = $username;
-        $post->artikel = $artikel;
-        $post->save();
-
-        redirect('welcome/tampil');
-
-        $this->_createView('tampil', []);
+        redirect('Welcome/index');
     }
 
-  
     public function hapus($id)
     {
         $this->_createView('hapus', []);
@@ -80,6 +82,7 @@ class Welcome extends CI_Controller
     public function update($id){
         $post = Post::find($id);
         $post->user_id = $this->input->post('username');
+        $post->jenis_artikel = $this->input->post('jenis_artikel');
         $post->artikel = $this->input->post('artikel');
         $post->save();
 
